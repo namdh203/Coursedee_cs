@@ -1,7 +1,6 @@
+using Coursedee.Api.HostingExtensions;
 using Coursedee.Application.Data.Repositories;
-using Coursedee.Infrastructure.Data;
 using Coursedee.Infrastructure.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
-    ));
+builder.Services.AddDbServices(builder.Configuration)
+                .AddRedisService(builder.Configuration)
+                .AddLocalStackServices(builder.Configuration);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
