@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --default-time-zone=Asia/Tokyo
+    environment:
+      - MYSQL_DATABASE=coursedee
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3309:3306"
+
+  redis:
+    image: redis:7.0-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "6383:6379"
+    volumes:
+      - redis:/data
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=s3,sqs,sns
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    ports:
+      - "4567:4566"
+    volumes:
+      - localstack:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  db:
+  redis:
+  localstack:
