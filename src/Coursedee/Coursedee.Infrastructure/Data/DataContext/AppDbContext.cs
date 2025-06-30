@@ -1,7 +1,7 @@
 using Coursedee.Application.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Coursedee.Infrastructure.Data;
+namespace Coursedee.Infrastructure.Data.DataContext;
 
 public class AppDbContext : DbContext
 {
@@ -9,7 +9,6 @@ public class AppDbContext : DbContext
     {
     }
 
-    // DbSets
     public DbSet<User> Users { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
