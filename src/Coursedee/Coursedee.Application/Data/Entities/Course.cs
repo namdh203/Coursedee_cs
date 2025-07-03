@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Coursedee.Application.Data.Entities.Common;
 
 namespace Coursedee.Application.Data.Entities;
 
-public class Course
+public class Course : BaseEntity
 {
     [Key]
     [Column(TypeName = "bigint")]
@@ -19,10 +20,6 @@ public class Course
     [Required]
     [Column(TypeName = "bigint")]
     public long TeacherId { get; set; }
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     [ForeignKey("TeacherId")]
     public virtual User Teacher { get; set; } = null!;

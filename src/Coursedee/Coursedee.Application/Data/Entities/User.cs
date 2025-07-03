@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Coursedee.Application.Data.Entities.Common;
 
 namespace Coursedee.Application.Data.Entities;
 
-public class User
+public class User : BaseEntity
 {
     [Key]
     [Column(TypeName = "bigint")]
@@ -29,10 +30,6 @@ public class User
     public string? ResetPasswordToken { get; set; }
 
     public DateTime? ResetPasswordSentAt { get; set; }
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     public virtual ICollection<Course> TeachingCourses { get; set; } = new List<Course>();
 } 
