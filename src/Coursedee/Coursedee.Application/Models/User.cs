@@ -18,7 +18,9 @@ public class User : BaseEntity
     public MappingProfile()
     {
       CreateMap<Data.Entities.User, User>()
-        .ForMember(dest => dest.PasswordDigest, opt => opt.Ignore());
+        .ForMember(dest => dest.PasswordDigest, opt => opt.Ignore())
+        .ForMember(dest => dest.ResetPasswordToken, opt => opt.Ignore())
+        .ForMember(dest => dest.ResetPasswordSentAt, opt => opt.Ignore());
     }
   }
 }

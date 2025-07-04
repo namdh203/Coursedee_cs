@@ -7,7 +7,7 @@ namespace Coursedee.Api.HostingExtensions;
 
 public static partial class HostingExtensions
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>()
@@ -16,7 +16,8 @@ public static partial class HostingExtensions
 
         // UseCases
         services.AddScoped<IUserUseCase, UserUseCase>()
-                .AddScoped<IAuthUseCase, AuthUseCase>();
+                .AddScoped<IAuthUseCase, AuthUseCase>()
+                .AddScoped<ICourseUseCase, CourseUseCase>();
 
         // Services
         services.AddScoped<IJwtService, JwtService>();

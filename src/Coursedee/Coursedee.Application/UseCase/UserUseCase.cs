@@ -6,7 +6,7 @@ namespace Coursedee.Application.UseCase;
 
 public interface IUserUseCase
 {
-  Task<IEnumerable<User>> GetAllUsersAsync();
+  Task<List<User>> GetAllUsersAsync();
 }
 
 public class UserUseCase : IUserUseCase
@@ -20,8 +20,8 @@ public class UserUseCase : IUserUseCase
     _mapper = mapper;
   }
 
-  public async Task<IEnumerable<User>> GetAllUsersAsync()
+  public async Task<List<User>> GetAllUsersAsync()
   {
-    return _mapper.Map<IEnumerable<User>>(await _userRepository.GetAllAsync());
+    return _mapper.Map<List<User>>(await _userRepository.GetAllAsync());
   }
 }

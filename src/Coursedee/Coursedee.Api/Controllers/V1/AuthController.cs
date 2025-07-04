@@ -1,7 +1,8 @@
 using Coursedee.Application.UseCase;
-using Coursedee.Application.Models;
 using Coursedee.Api.DTOs;
+using Coursedee.Api.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Coursedee.Api.Common;
 
 namespace Coursedee.Api.Controllers.V1;
 
@@ -10,77 +11,44 @@ namespace Coursedee.Api.Controllers.V1;
 public class AuthController : ControllerBase
 {
     private readonly IAuthUseCase _authUseCase;
-    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IAuthUseCase authUseCase, ILogger<AuthController> logger)
+    public AuthController(IAuthUseCase authUseCase)
     {
         _authUseCase = authUseCase;
-        _logger = logger;
     }
 
     [HttpPost("login")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<object>> Login([FromBody] LoginRequestDto request)
     {
-        try
-        {
-            var (user, token) = await _authUseCase.LoginAsync(request.Email, request.Password);
-            
-            if (user == null)
-                return BadRequest(new { success = false, message = "Invalid email or password", data = new { } });
+        var (user, token) = await _authUseCase.LoginAsync(request.Email, request.Password);
+        
+        if (user == null)
+            throw new BadRequestException("Invalid email or password");
 
-            return Ok(new
-            {
-                success = true,
-                message = "Login successful",
-                data = new {
-                  user = new {
-                      user.Id,
-                      user.Name,
-                      user.Email,
-                      Role = (UserRole)user.Role,
-                      token
-                  }
-                }
-            });
-        }
-        catch (Exception ex)
+        var authResponse = new AuthResponseDto
         {
-            _logger.LogError(ex, "Error during login");
-            return StatusCode(500, new { success = false, message = "Internal server error", data = new { } });
-        }
+            User = user,
+            Token = token
+        };
+
+        return Ok(ApiResponse<object>.ResponseGeneral(true, "Login successful", authResponse));
     }
 
     [HttpPost("register")]
     public async Task<ActionResult<object>> Register([FromBody] RegisterRequestDto request)
     {
-        try
-        {
-            var (user, token) = await _authUseCase.RegisterAsync(request.Name, request.Email, request.Password, request.Role);
-            
-            if (user == null)
-                return BadRequest(new { success = false, message = "User with this email already exists", data = new { } });
+        var (user, token) = await _authUseCase.RegisterAsync(request.Name, request.Email, request.Password, request.Role);
+        
+        if (user == null)
+            throw new BadRequestException("User with this email already exists");
 
-            return Ok(new
-            {
-                success = true,
-                message = "Registration successful",
-                data = new
-                {
-                    user = new {
-                      user.Id,
-                      user.Name,
-                      user.Email,
-                      Role = (UserRole)user.Role,
-                      token
-                  }
-                }
-            });
-        }
-        catch (Exception ex)
+        var authResponse = new AuthResponseDto
         {
-            _logger.LogError(ex, "Error during registration");
-            return StatusCode(500, new { success = false, message = "Internal server error", data = new {} });
-        }
+            User = user,
+            Token = token
+        };
+
+        return Ok(ApiResponse<object>.ResponseGeneral(true, "Registration successful", authResponse));
     }
-}
+} 

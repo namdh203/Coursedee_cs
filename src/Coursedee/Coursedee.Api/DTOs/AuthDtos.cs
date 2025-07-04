@@ -29,4 +29,10 @@ public record RegisterRequestDto
     
     [Required]
     public UserRole Role { get; init; } = UserRole.Student;
+}
+
+public record AuthResponseDto
+{
+    public User User { get; init; } = new();
+    public string Token { get; init; } = string.Empty;
 } 

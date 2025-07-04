@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace Coursedee.Api.Filters;
 
-public class FilterRole : AuthorizeAttribute, IAuthorizationFilter
+public class FilterRole: AuthorizeAttribute, IAuthorizationFilter
 {
     public new UserRole[] Roles { get; }
 

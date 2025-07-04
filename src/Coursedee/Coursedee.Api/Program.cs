@@ -1,4 +1,6 @@
 using Coursedee.Api.HostingExtensions;
+using Coursedee.Api.Middleware;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +12,10 @@ builder.Services.AddSwaggerConfiguration();
 
 builder.Services
     .AddDatabaseContexts(builder.Configuration)
-    .AddApplicationServices(builder.Configuration)
     .AddCloudStorage(builder.Configuration)
-    .AddAutoMapperConfigs()
-    .AddJwtAuthentication(builder.Configuration);
+    .AddJwtAuthentication(builder.Configuration)
+    .AddApplicationServices()
+    .AddAutoMapperConfigs();
 
 var app = builder.Build();
 
@@ -25,6 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseExceptionHandling();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

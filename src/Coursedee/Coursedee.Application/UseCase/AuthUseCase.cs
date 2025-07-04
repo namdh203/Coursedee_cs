@@ -5,27 +5,31 @@ using Coursedee.Application.Services;
 using System.Security.Cryptography;
 using System.Text;
 using UserEntity = Coursedee.Application.Data.Entities.User;
+using UserModel = Coursedee.Application.Models.User;
+using AutoMapper;
 
 namespace Coursedee.Application.UseCase;
 
 public interface IAuthUseCase
 {
-    Task<(UserEntity? user, string token)> LoginAsync(string email, string password);
-    Task<(UserEntity? user, string token)> RegisterAsync(string name, string email, string password, UserRole role);
+    Task<(UserModel? user, string token)> LoginAsync(string email, string password);
+    Task<(UserModel? user, string token)> RegisterAsync(string name, string email, string password, UserRole role);
 }
 
 public class AuthUseCase : IAuthUseCase
 {
     private readonly IUserRepository _userRepository;
     private readonly IJwtService _jwtService;
+    private readonly IMapper _mapper;
 
-    public AuthUseCase(IUserRepository userRepository, IJwtService jwtService)
+    public AuthUseCase(IUserRepository userRepository, IJwtService jwtService, IMapper mapper)
     {
         _userRepository = userRepository;
         _jwtService = jwtService;
+        _mapper = mapper;
     }
 
-    public async Task<(UserEntity? user, string token)> LoginAsync(string email, string password)
+    public async Task<(UserModel? user, string token)> LoginAsync(string email, string password)
     {
         var user = await _userRepository.GetByEmailAsync(email);
         if (user == null)
@@ -36,10 +40,10 @@ public class AuthUseCase : IAuthUseCase
             return (null, string.Empty);
 
         var token = _jwtService.GenerateToken(user);
-        return (user, token);
+        return (_mapper.Map<UserModel>(user), token);
     }
 
-    public async Task<(UserEntity? user, string token)> RegisterAsync(string name, string email, string password, UserRole role)
+    public async Task<(UserModel? user, string token)> RegisterAsync(string name, string email, string password, UserRole role)
     {
         var existingUser = await _userRepository.GetByEmailAsync(email);
         if (existingUser != null)
@@ -57,7 +61,7 @@ public class AuthUseCase : IAuthUseCase
         var createdUser = await _userRepository.CreateAsync(newUser);
         var token = _jwtService.GenerateToken(createdUser);
         
-        return (createdUser, token);
+        return (_mapper.Map<UserModel>(createdUser), token);
     }
 
     private string HashPassword(string password)
