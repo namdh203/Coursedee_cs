@@ -32,6 +32,8 @@ app.UseExceptionHandling();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseUserContext();
+
 app.MapControllers();
 
 app.Run();

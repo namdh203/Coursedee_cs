@@ -19,26 +19,24 @@ public class CourseRepository : ICourseRepository
         return await _context.Courses.ToListAsync();
     }
 
-    public async Task<Course> GetByIdAsync(long id)
+    public async Task<Course?> GetByIdAsync(long id)
     {
         return await _context.Courses.FindAsync(id);
     }
 
-    public async Task<Course> AddAsync(Course course)
+    public async Task AddAsync(Course course)
     {
         await _context.Courses.AddAsync(course);
         await _context.SaveChangesAsync();
-        return course;
     }
 
-    public async Task<Course> UpdateAsync(Course course)
+    public async Task UpdateAsync(Course course)
     {
         _context.Courses.Update(course);
         await _context.SaveChangesAsync();
-        return course;
     }
 
-    public async Task<Course> DeleteAsync(long id)
+    public async Task DeleteAsync(long id)
     {
         var course = await _context.Courses.FindAsync(id);
         if (course == null)
@@ -47,6 +45,5 @@ public class CourseRepository : ICourseRepository
         }
         _context.Courses.Remove(course);
         await _context.SaveChangesAsync();
-        return course;
     }
 }

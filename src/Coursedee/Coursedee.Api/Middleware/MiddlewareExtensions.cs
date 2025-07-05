@@ -6,4 +6,9 @@ public static class MiddlewareExtensions
     {
         return app.UseMiddleware<ExceptionHandlingMiddleware>();
     }
+
+    public static IApplicationBuilder UseUserContext(this IApplicationBuilder app)
+    {
+        return app.UseMiddleware<UseUserContextMiddleware>();
+    }
 } 
