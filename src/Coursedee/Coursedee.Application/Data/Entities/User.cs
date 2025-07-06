@@ -32,4 +32,10 @@ public class User : BaseEntity
     public DateTime? ResetPasswordSentAt { get; set; }
 
     public virtual ICollection<Course> TeachingCourses { get; set; } = new List<Course>();
+
+    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+
+    public ICollection<LessonProcess> LessonProcesses { get; set; } = new List<LessonProcess>();
+
+    public ICollection<Review> Reviews { get; set; } = new List<Review>();
 } 
