@@ -3,7 +3,7 @@ using Coursedee.Application.Data.Entities.Common;
 
 namespace Coursedee.Application.Models;
 
-public class User : BaseEntity
+public class User
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;

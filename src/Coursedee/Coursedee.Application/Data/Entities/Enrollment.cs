@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Coursedee.Application.Data.Entities.Common;
 
 namespace Coursedee.Application.Data.Entities;
 
-public class Enrollment
+public class Enrollment : BaseEntity
 {
     [Key]
     [Column(TypeName = "bigint")]

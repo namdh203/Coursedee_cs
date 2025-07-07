@@ -1,9 +1,8 @@
 using AutoMapper;
-using Coursedee.Application.Data.Entities.Common;
 
 namespace Coursedee.Application.Models;
 
-public class Course : BaseEntity
+public class Course
 {
     public long Id { get; set; }
     public string Name { get; set; } = string.Empty;

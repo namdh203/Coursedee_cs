@@ -1,8 +1,7 @@
 using Coursedee.Application.Data.Repositories;
 using Coursedee.Infrastructure.Data.DataContext;
-using Microsoft.EntityFrameworkCore;
 using Coursedee.Application.Data.Entities;
-using System.Runtime.InteropServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coursedee.Infrastructure.Data.Repositories;
 
@@ -42,7 +41,7 @@ public class LessonRepository : ILessonRepository
         var lesson = await _context.Lessons.FindAsync(id);
         if (lesson == null)
         {
-            throw new Exception("Lesson not found");
+            throw new Exception("Course not found");
         }
         _context.Lessons.Remove(lesson);
         await _context.SaveChangesAsync();

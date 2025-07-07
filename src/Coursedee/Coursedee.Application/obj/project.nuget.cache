@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "tosZ80Mgxy+tFVXDnM+xYR7F3VtWoWaHsU2REwIdzkMMqKGTnQrxqdt9Ywo9dAJL9tGDqPmKu6QdG7uGHkoN+Q==",
+  "success": true,
+  "projectFilePath": "/home/namdh/Downloads/test_rails/Coursedee_cs/src/Coursedee/Coursedee.Application/Coursedee.Application.csproj",
+  "expectedPackageFiles": [
+    "/home/namdh/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.identitymodel.abstractions/7.4.0/microsoft.identitymodel.abstractions.7.4.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.4.0/microsoft.identitymodel.jsonwebtokens.7.4.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.identitymodel.logging/7.4.0/microsoft.identitymodel.logging.7.4.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/microsoft.identitymodel.tokens/7.4.0/microsoft.identitymodel.tokens.7.4.0.nupkg.sha512",
+    "/home/namdh/.nuget/packages/system.identitymodel.tokens.jwt/7.4.0/system.identitymodel.tokens.jwt.7.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

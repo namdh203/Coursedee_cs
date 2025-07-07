@@ -16,12 +16,15 @@ public static partial class HostingExtensions
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<ICourseRepository, CourseRepository>()
-                .AddScoped<ILessonRepository, LessonRepository>();
+                .AddScoped<ILessonRepository, LessonRepository>()
+                .AddScoped<IReviewRepository, ReviewRepository>();
 
         // UseCases
         services.AddScoped<IUserUseCase, UserUseCase>()
                 .AddScoped<IAuthUseCase, AuthUseCase>()
-                .AddScoped<ICourseUseCase, CourseUseCase>();
+                .AddScoped<ICourseUseCase, CourseUseCase>()
+                .AddScoped<ILessonUseCase, LessonUseCase>()
+                .AddScoped<IReviewUseCase, ReviewUseCase>();
 
         // Services
         services.AddScoped<IJwtService, JwtService>();

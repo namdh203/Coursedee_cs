@@ -1,7 +1,6 @@
 using Coursedee.Application.UseCase;
 using Coursedee.Application.Models;
 using Coursedee.Api.Filters;
-using Coursedee.Api.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Coursedee.Api.Common;
 
@@ -22,23 +21,13 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [FilterRole(UserRole.Admin)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<UserResponseDto>>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<User>>))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ApiResponse<object>))]
-    public async Task<ActionResult<ApiResponse<List<UserResponseDto>>>> GetUsers()
+    public async Task<ActionResult<ApiResponse<List<User>>>> GetUsers()
     {
         var users = await _userUseCase.GetAllUsersAsync();
-        var userDtos = users.Select(user => new UserResponseDto
-        {
-            Id = user.Id,
-            Name = user.Name,
-            Email = user.Email,
-            Role = user.Role,
-            CreatedAt = user.CreatedAt,
-            UpdatedAt = user.UpdatedAt
-        }).ToList();
-
-        return Ok(ApiResponse<List<UserResponseDto>>.ResponseGeneral(true, "Users retrieved successfully", userDtos));
+        return Ok(ApiResponse<List<User>>.ResponseGeneral(true, "Users retrieved successfully", users));
     }
 } 

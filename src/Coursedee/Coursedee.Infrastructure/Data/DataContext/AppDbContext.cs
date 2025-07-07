@@ -17,7 +17,6 @@ public class AppDbContext : DbContext
     public DbSet<LessonProcess> LessonProcesses { get; set; }
     public DbSet<Review> Reviews { get; set; }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

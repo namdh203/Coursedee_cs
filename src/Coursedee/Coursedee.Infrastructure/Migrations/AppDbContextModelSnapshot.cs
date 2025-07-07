@@ -55,7 +55,7 @@ namespace Coursedee.Infrastructure.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.Enrollment", b =>
@@ -69,6 +69,12 @@ namespace Coursedee.Infrastructure.Migrations
                     b.Property<long>("CourseId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<DateTimeOffset>("CreatedAt"));
+
                     b.Property<DateTimeOffset>("EnrolledAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
@@ -78,13 +84,16 @@ namespace Coursedee.Infrastructure.Migrations
                     b.Property<long>("StudentId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Enrollments");
+                    b.ToTable("Enrollments", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.Lesson", b =>
@@ -120,7 +129,7 @@ namespace Coursedee.Infrastructure.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lessons", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.LessonProcess", b =>
@@ -158,7 +167,7 @@ namespace Coursedee.Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("LessonProcesses");
+                    b.ToTable("LessonProcesses", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.Material", b =>
@@ -193,7 +202,7 @@ namespace Coursedee.Infrastructure.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Materials");
+                    b.ToTable("Materials", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.Review", b =>
@@ -233,7 +242,7 @@ namespace Coursedee.Infrastructure.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.User", b =>
@@ -283,7 +292,7 @@ namespace Coursedee.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Coursedee.Application.Data.Entities.Course", b =>
