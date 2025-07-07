@@ -23,4 +23,8 @@ public class Lesson : BaseEntity
 
     [ForeignKey("CourseId")]
     public virtual Course Course { get; set; } = null!;
+
+    public ICollection<Material> Materials { get; set; } = new List<Material>();
+
+    public ICollection<LessonProcess> LessonProcesses { get; set; } = new List<LessonProcess>();
 }

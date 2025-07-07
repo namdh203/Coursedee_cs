@@ -5,22 +5,22 @@ namespace Coursedee.Application.Models;
 
 public class User : BaseEntity
 {
-  public long Id { get; set; }
-  public string Name { get; set; } = string.Empty;
-  public string Email { get; set; } = string.Empty;
-  public string PasswordDigest { get; set; } = string.Empty;
-  public int Role { get; set; }
-  public string? ResetPasswordToken { get; set; }
-  public DateTime? ResetPasswordSentAt { get; set; }
+    public long Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordDigest { get; set; } = string.Empty;
+    public int Role { get; set; }
+    public string? ResetPasswordToken { get; set; }
+    public DateTime? ResetPasswordSentAt { get; set; }
 
-  public class MappingProfile : Profile
-  {
-    public MappingProfile()
+    public class MappingProfile : Profile
     {
-      CreateMap<Data.Entities.User, User>()
-        .ForMember(dest => dest.PasswordDigest, opt => opt.Ignore())
-        .ForMember(dest => dest.ResetPasswordToken, opt => opt.Ignore())
-        .ForMember(dest => dest.ResetPasswordSentAt, opt => opt.Ignore());
+        public MappingProfile()
+        {
+          CreateMap<Data.Entities.User, User>()
+            .ForMember(dest => dest.PasswordDigest, opt => opt.Ignore())
+            .ForMember(dest => dest.ResetPasswordToken, opt => opt.Ignore())
+            .ForMember(dest => dest.ResetPasswordSentAt, opt => opt.Ignore());
+        }
     }
-  }
 }

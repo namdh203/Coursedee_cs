@@ -9,6 +9,10 @@ public static partial class HostingExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        // Context
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContextAccessor, DefaultUserContextAccessor>();
+
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<ICourseRepository, CourseRepository>()

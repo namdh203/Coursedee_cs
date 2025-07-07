@@ -4,9 +4,9 @@ namespace Coursedee.Application.Data.Repositories;
 
 public interface ICourseRepository
 {
-  Task<List<Course>> GetAllAsync();
-  Task<Course> GetByIdAsync(long id);
-  Task<Course> AddAsync(Course course);
-  Task<Course> UpdateAsync(Course course);
-  Task<Course> DeleteAsync(long id);
+    Task<List<Course>> GetAllAsync();
+    Task<Course?> GetByIdAsync(long id);
+    Task AddAsync(Course course);
+    Task UpdateAsync(Course course);
+    Task DeleteAsync(long id);
 }

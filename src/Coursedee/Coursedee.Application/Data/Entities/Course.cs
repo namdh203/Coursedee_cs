@@ -23,6 +23,10 @@ public class Course : BaseEntity
 
     [ForeignKey("TeacherId")]
     public virtual User Teacher { get; set; } = null!;
-    
+
     public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
+
+    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+
+    public ICollection<Review> Reviews { get; set; } = new List<Review>();
 } 
